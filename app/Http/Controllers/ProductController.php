@@ -15,7 +15,8 @@ class ProductController extends Controller
     public function index()
     {
         $product = new Product();
-        $product->getWebData();
+        $products = $product->all();
+        return view('products',['products' => $products]);
     }
 
     /**
@@ -36,7 +37,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $products = $product->getWebData();
+        Product::insert($products);
     }
 
     /**

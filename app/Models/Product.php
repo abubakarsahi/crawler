@@ -2,7 +2,7 @@
 
 namespace App\Models;
 use App\Services\Scrapper;
-class Product
+class Product extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
@@ -21,7 +21,7 @@ class Product
     public function getWebData(): array
     {
         $scrapper = new Scrapper();
-
-        $scrapper->getResponse();
+        $protucts = $scrapper->getResponse('https://github.com');
+        return $protucts;
     }
 }
