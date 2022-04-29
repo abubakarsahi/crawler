@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Goutte\Client;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -14,15 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://github.com/');
-        dd($crawler->selectLink('Sign in')->link());
-        $crawler = $client->click($crawler->selectLink('Sign in')->link());
-        $form = $crawler->selectButton('Sign in')->form();
-        $crawler = $client->submit($form, ['login' => 'fabpot', 'password' => 'xxxxxx']);
-        $crawler->filter('.flash-error')->each(function ($node) {
-            print $node->text()."\n";
-        });
+        $product = new Product();
+        $product->getWebData();
     }
 
     /**
